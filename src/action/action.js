@@ -1,12 +1,12 @@
 
 export const removeFeature = (feature) => {
     return {
-        type: 'REMOVEFEATURE', payload: feature
+        type: 'REMOVE_FEATURE', payload: feature
     }
 }
 
 export const addFeature = (feature) => {
     return {
-        type: 'ADDFEATURE', payload: feature
+        type: 'ADD_FEATURE', payload: feature
     }
 }

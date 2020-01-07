@@ -15,7 +15,7 @@ const App = (props) => {
   };
 
   const buyItem = item => {
-    // dipsatch an action here to add an item
+    props.addFeature(item)
   };
 
   return (
@@ -25,7 +25,7 @@ const App = (props) => {
         <AddedFeatures car={props.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={props.additionalFeatures} />
+        <AdditionalFeatures additionalFeatures={props.additionalFeatures} buyItem = {buyItem} />
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
@@ -40,4 +40,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {removeFeature, addFeature}) (App);
+export default connect(mapStateToProps, {removeFeature, addFeature})(App);
