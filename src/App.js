@@ -4,40 +4,46 @@ import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
-import {connect} from 'react-redux'
-import {removeFeature, addFeature} from './action/action'
+import {useDispatch, useSelector} from 'react-redux'
+import {removeFeatures, addFeature} from './action/action'
 
 const App = (props) => {
   
+  const car = useSelector(state => state.car)
+  const additionalFeatures = useSelector(state => state.additionalFeatures)
+  const additionalPrice = useSelector(state => state.additionalPrice)
+  const dispatch = useDispatch();
 
   const removeFeature = item => {
     // dispatch an action here to remove an item
+    dispatch(removeFeatures(item))
   };
 
   const buyItem = item => {
-    props.addFeature(item)
+    dispatch(addFeature(item))
   };
 
   return (
     <div className="boxes">
       <div className="box">
-        <Header car={props.car} />
-        <AddedFeatures car={props.car} />
+        <Header car={car} />
+        <AddedFeatures car={car} removeFeature = {removeFeature}/>
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={props.additionalFeatures} buyItem = {buyItem} />
-        <Total car={props.car} additionalPrice={props.additionalPrice} />
+        <AdditionalFeatures additionalFeatures={additionalFeatures} buyItem = {buyItem}/>
+        <Total car={car} additionalPrice={additionalPrice} />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    car: state.car,
-    additionalFeatures: state.additionalFeatures,
-    additionalPrice: state.additionalPrice
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     car: state.car,
+//     additionalFeatures: state.additionalFeatures,
+//     additionalPrice: state.additionalPrice
+//   }
+// }
 
-export default connect(mapStateToProps, {removeFeature, addFeature})(App);
+// export default connect(mapStateToProps, {removeFeature, addFeature})(App);
+export default App;
